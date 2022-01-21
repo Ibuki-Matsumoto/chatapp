@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "chatapp",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/ibuki/Desktop/code/chat-syupre/chatapp/amplify/backend/api/chatapp/schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authchatappa22be4bd"
+    }
+  }
+}

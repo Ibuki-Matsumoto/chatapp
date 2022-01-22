@@ -15,11 +15,6 @@ function Home({ messages }) {
   const [messageText, setMessageText] = useState("");
   const [user, setUser] = useState(null);
 
-  function scrollToEnd() {
-    const messagesArea = document.getElementById('scroll-inner');
-    window.scroll(0, messagesArea.scrollHeight)
-  }
-
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -33,7 +28,6 @@ function Home({ messages }) {
 
     fetchUser();
 
-    // Subscribe to creation of message
     const subscription = API.graphql(
       graphqlOperation(onCreateMessage)
     ).subscribe({
@@ -63,19 +57,15 @@ function Home({ messages }) {
   }, [user]);
 
   const handleSubmit = async (event) => {
-    // Prevent the page from reloading
     event.preventDefault();
 
-    // clear the textbox
     setMessageText("");
 
     const input = {
-      // id is auto populated by AWS Amplify
-      message: messageText, // the message content the user submitted (from state)
-      owner: user.username, // this is the username of the current user
+      message: messageText,
+      owner: user.username,
     };
 
-    // Try make the mutation to graphql API
     try {
       await API.graphql({
         authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -97,10 +87,8 @@ function Home({ messages }) {
         <Box w="100%" bg={useColorModeValue('white', 'gray.700')}>
           <Box overflow="scroll" my="80px" id="scroll-inner">
             {stateMessages
-              // sort messages oldest to newest client-side
               .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
               .map((message) => (
-                // map each message into the message component with message as props
                 <Message
                   message={message}
                   user={user}
@@ -125,7 +113,7 @@ function Home({ messages }) {
                   onChange={(e) => setMessageText(e.target.value)}
                   placeholder="メッセージを入力してください..."
                 />
-                <button onClick={scrollToEnd()}>Send</button>
+                <button>Send</button>
               </form>
             </Box>
           </Box>
@@ -140,29 +128,23 @@ function Home({ messages }) {
 export default withAuthenticator(Home);
 
 export async function getServerSideProps({ req }) {
-  // wrap the request in a withSSRContext to use Amplify functionality serverside.
   const SSR = withSSRContext({ req });
 
   try {
-    // currentAuthenticatedUser() will throw an error if the user is not signed in.
     const user = await SSR.Auth.currentAuthenticatedUser();
 
-    // If we make it passed the above line, that means the user is signed in.
     const response = await SSR.API.graphql({
       query: listMessages,
-      // use authMode: AMAZON_COGNITO_USER_POOLS to make a request on the current user's behalf
+
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
 
-    // return all the messages from the dynamoDB
     return {
       props: {
         messages: response.data.listMessages.items,
       },
     };
   } catch (error) {
-    // We will end up here if there is no user signed in.
-    // We'll just return a list of empty messages.
     return {
       props: {
         messages: [],

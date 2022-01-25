@@ -25,7 +25,6 @@ function Home({ messages }) {
       }
     };
 
-
     fetchUser();
 
     const subscription = API.graphql(
@@ -49,6 +48,9 @@ function Home({ messages }) {
           authMode: "AMAZON_COGNITO_USER_POOLS",
         });
         setStateMessages([...messagesReq.data.listMessages.items]);
+        const main = document.getElementById("scroll-inner");
+        console.log(main)
+
       } catch (error) {
         console.error(error);
       }
@@ -87,7 +89,7 @@ function Home({ messages }) {
         <Box w="100%" bg={useColorModeValue('white', 'gray.700')}>
           <Box overflow="scroll" my="80px" id="scroll-inner">
             {stateMessages
-              .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+              .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
               .map((message) => (
                 <Message
                   message={message}

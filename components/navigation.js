@@ -19,13 +19,13 @@ import { Auth } from 'aws-amplify'
 
 const Navigation = () => {
 
-    async function signOut() {
-        try {
-            await Auth.signOut();
-        } catch (error) {
-            console.log('error signing out: ', error);
-        }
-    }
+    // async function signOut() {
+    //     try {
+    //         await Auth.signOut();
+    //     } catch (error) {
+    //         console.log('error signing out: ', error);
+    //     }
+    // }
 
     const { colorMode, toggleColorMode } = useColorMode()
 

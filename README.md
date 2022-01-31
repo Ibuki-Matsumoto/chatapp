@@ -2,6 +2,10 @@
 
 就職作品プレゼンテーション展示用アプリケーションです。
 
+## 画像
+![スクショ]()
+![アーキテクチャ](./screen/architecture.png)
+
 ## 技術
 
 - Node.js@16.13.0
@@ -11,6 +15,7 @@
   - Amplify
   - App Sync(GraphQL)
   - DynamoDB
+  - Cognito
 
 全てのバージョン等は[こちら](./package.json)に記載しています。
 

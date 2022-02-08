@@ -14,12 +14,6 @@
     "categories": {
       "auth": {
         "chatappa22be4bd": {}
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d2n7y5armbwb39",
-          "type": "manual"
-        }
       }
     }
   }

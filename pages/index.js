@@ -8,7 +8,7 @@ import { onCreateMessage } from "../src/graphql/subscriptions";
 import Navigation from "../components/navigation";
 import '@aws-amplify/ui-react/styles.css';
 
-import { Box, Center, Input, Flex, useColorModeValue } from '@chakra-ui/react'
+import { Box, Input, Flex, useColorModeValue } from '@chakra-ui/react'
 
 
 function Home({ messages }) {

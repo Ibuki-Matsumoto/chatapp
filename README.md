@@ -2,6 +2,9 @@
 
 就職作品プレゼンテーション展示用アプリケーションです。
 
+## 追記(3/23)
+プレゼンも終わったのでpublicにします
+
 ## 画像
 ![スクショ](./screen/chat_dark.png)
 ![アーキテクチャ](./screen/architecture.png)
